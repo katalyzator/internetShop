@@ -1,0 +1,51 @@
+{% extends 'base.html' %}
+{% load staticfiles %}
+
+
+{% block content %}
+
+    <table class="table">
+        <thead>
+
+        <th></th>
+        <th>Product</th>
+
+        </thead>
+        <tbody>
+        {% for product in products %}
+            <tr>
+                <td style="width: 160px; height: 160px; ">Image
+                    {% if product.productimage_set.all %}
+
+                        {% for item in product.productimage_set.all %}
+                            {% if item.featured %}
+
+
+                                <div class="background_img_thumb" style="background-image: url('/media/{{ MEDIA_URL }}{{ item.image }}');">
+
+                                </div>
+
+                            {% endif %}
+                        {% endfor %}
+
+                    {% else %}
+
+                                <div class="background_img_thumb">
+
+                                </div>
+
+                    {% endif %}
+                </td>
+
+
+                <td><a href="{{ product.get_absolute_url }}">{{ product }} </a></td>
+
+            </tr>
+
+        {% endfor %}
+        </tbody>
+    </table>
+
+
+
+{% endblock %}
